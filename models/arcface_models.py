@@ -5,7 +5,12 @@ from torch import nn
 from torch.nn import Parameter
 from .config import device, num_classes
 
-
+#this is being added by me Abdulraheem 
+def conv3x3(in_planes, out_planes, stride=1):
+    """3x3 convolution with padding"""
+    return nn.Conv2d(in_planes, out_planes, kernel_size=3, stride=stride,
+                     padding=1, bias=False)
+#end of weird addition 
 
 class SEBlock(nn.Module):
     def __init__(self, channel, reduction=16):

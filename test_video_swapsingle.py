@@ -20,6 +20,22 @@ from insightface_func.face_detect_crop_single import Face_detect_crop
 from util.videoswap import video_swap
 import os
 
+
+import onnxruntime
+
+# Save the original function
+original_InferenceSession = onnxruntime.InferenceSession
+
+# Create a wrapper that handles both positional and keyword arguments
+def patched_InferenceSession(*args, **kwargs):
+    # Force providers if not specified
+    if 'providers' not in kwargs:
+        kwargs['providers'] = ['CUDAExecutionProvider', 'CPUExecutionProvider']
+    return original_InferenceSession(*args, **kwargs)
+
+# Apply the patch
+onnxruntime.InferenceSession = patched_InferenceSession
+
 def lcm(a, b): return abs(a * b) / fractions.gcd(a, b) if a and b else 0
 
 transformer = transforms.Compose([

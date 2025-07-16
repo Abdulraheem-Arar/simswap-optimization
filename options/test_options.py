@@ -34,5 +34,8 @@ class TestOptions(BaseOptions):
         self.parser.add_argument('--no_simswaplogo', action='store_true', help='Remove the watermark')
         self.parser.add_argument('--use_mask', action='store_true', help='Use mask for better result')
         self.parser.add_argument('--crop_size', type=int, default=512, help='Crop of size of input image')
-        
+        self.parser.add_argument('--is_pruned', action='store_true', help='use pruned model')
+        self.parser.add_argument('--prune_amount', type=float, default=0.3, help='pruning amount')
+        self.parser.add_argument('--load_pruned', action='store_true', help='load pruned weights')
+        self.parser.add_argument('--save_pruned', action='store_true', help='save pruned weights')
         self.isTrain = False

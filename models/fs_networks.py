@@ -137,6 +137,9 @@ class Generator_Adain_Upsample(nn.Module):
                                         nn.Tanh())
 
     def forward(self, input, dlatents):
+                # Add this at the start of Generator.forward()
+        print(f"dlatents shape: {dlatents.shape if torch.is_tensor(dlatents) else dlatents}")
+        print(f"dlatents norm: {torch.norm(dlatents) if torch.is_tensor(dlatents) else None}")
         x = input  # 3*224*224
 
         skip1 = self.first_layer(x)
